@@ -1,22 +1,19 @@
-# API de Cadastro com Confirmação por E-mail
+# API de Cadastro com Confirmação de E-mail
 
-Esta é uma API REST desenvolvida para gerenciar o fluxo de cadastro de usuários, implementando uma camada extra de segurança através da validação de e-mail via token.
+API REST desenvolvida com Java 21 e Spring Boot para cadastro de usuários com validação de conta via e-mail utilizando token.
 
-## 🛠 Tecnologias Utilizadas
-* **Java 17+**
-* **Spring Boot 3**
-* **Spring Security** (para autenticação e tokens)
-* **Spring Data JPA**
-* **Spring Mail** (para envio de e-mails)
-* **MySQL/PostgreSQL** (ou o banco que você usou)
+##  Funcionalidades
 
-## ⚙️ Funcionalidades
-- [x] Cadastro de novos usuários.
-- [x] Geração de token único para validação.
-- [x] Envio automático de e-mail de confirmação.
-- [x] Ativação de conta após validação do token.
+- Cadastro de usuário
+- Envio de e-mail para confirmação de conta (Mailtrap)
+- Validação de usuário via token
+- Persistência de dados com MySQL
+- Arquitetura em camadas (Controller, Service, Repository)
 
-## 🚀 Como executar o projeto
-1. Clone o repositório.
-2. Configure as credenciais de e-mail no `application.properties`.
-3. Execute `./mvnw spring-boot:run`.
+##  Tecnologias
+
+- Java 21
+- Spring Boot
+- Spring Data JPA
+- MySQL
+- Mailtrap (envio de e-mails em ambiente de teste)
