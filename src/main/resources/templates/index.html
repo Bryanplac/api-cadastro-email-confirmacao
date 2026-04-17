@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achadinhos da Vez</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Estilos do cabeçalho */
+        .header {
+            background-color: #ffffff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #555;
+            text-decoration: none;
+        }
+
+        .header .auth-links a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            margin-left: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .header .auth-links a:hover {
+            color: #0056b3;
+        }
+
+        /* Estilos da seção principal (hero) */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        /* Estilos dos botões */
+        .cta-buttons a {
+            text-decoration: none;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .cta-buttons .btn-login {
+            background-color: #007bff;
+        }
+
+        .cta-buttons .btn-login:hover {
+            background-color: #0056b3;
+        }
+
+        .cta-buttons .btn-cadastro {
+            background-color: #28a745;
+        }
+
+        .cta-buttons .btn-cadastro:hover {
+            background-color: #218838;
+        }
+
+        /* Estilos do rodapé */
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            color: #777;
+            border-top: 1px solid #e0e0e0;
+            background-color: #ffffff;
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <a href="#" class="logo">Achadinhos da Vez</a>
+    <nav class="auth-links">
+        <a href="login.html">Login</a>
+        <a href="cadastro.html">Cadastro</a>
+    </nav>
+</header>
+
+<main class="main-content">
+    <div class="hero">
+        <h1>O novo paraíso do garimpo online.</h1>
+        <p>Descubra peças únicas e dê uma nova vida à moda. Sua próxima grande descoberta espera por você aqui.</p>
+        <div class="cta-buttons">
+            <a href="login.html" class="btn-login">Acesse sua conta</a>
+            <a href="cadastro.html" class="btn-cadastro">Cadastre-se agora</a>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2025 Achadinhos da Vez. Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>

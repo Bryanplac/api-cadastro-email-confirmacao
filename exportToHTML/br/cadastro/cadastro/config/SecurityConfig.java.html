@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>SecurityConfig.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SecurityConfig.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">br</span><span class="s2">.</span><span class="s1">cadastro</span><span class="s2">.</span><span class="s1">cadastro</span><span class="s2">.</span><span class="s1">config</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">context</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">Bean</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">context</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">Configuration</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">security</span><span class="s2">.</span><span class="s1">config</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">web</span><span class="s2">.</span><span class="s1">builders</span><span class="s2">.</span><span class="s1">HttpSecurity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">security</span><span class="s2">.</span><span class="s1">config</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">web</span><span class="s2">.</span><span class="s1">configuration</span><span class="s2">.</span><span class="s1">EnableWebSecurity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">security</span><span class="s2">.</span><span class="s1">crypto</span><span class="s2">.</span><span class="s1">bcrypt</span><span class="s2">.</span><span class="s1">BCryptPasswordEncoder</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">security</span><span class="s2">.</span><span class="s1">crypto</span><span class="s2">.</span><span class="s1">password</span><span class="s2">.</span><span class="s1">PasswordEncoder</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">security</span><span class="s2">.</span><span class="s1">web</span><span class="s2">.</span><span class="s1">SecurityFilterChain</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">security</span><span class="s2">.</span><span class="s1">config</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">web</span><span class="s2">.</span><span class="s1">configurers</span><span class="s2">.</span><span class="s1">AbstractHttpConfigurer</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">http</span><span class="s2">.</span><span class="s1">HttpMethod</span><span class="s2">; </span><span class="s3">// Importação necessária para usar HttpMethod</span>
+
+<span class="s3">// Habilita a configuração de segurança web</span>
+<span class="s1">@Configuration</span>
+<span class="s1">@EnableWebSecurity</span>
+<span class="s0">public class </span><span class="s1">SecurityConfig </span><span class="s2">{</span>
+
+    <span class="s3">// Define o Bean para o PasswordEncoder (BCrypt)</span>
+    <span class="s1">@Bean</span>
+    <span class="s0">public </span><span class="s1">PasswordEncoder passwordEncoder</span><span class="s2">() {</span>
+        <span class="s0">return new </span><span class="s1">BCryptPasswordEncoder</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Define a cadeia de filtros de segurança (O CORAÇÃO DA SOLUÇÃO)</span>
+    <span class="s1">@Bean</span>
+    <span class="s0">public </span><span class="s1">SecurityFilterChain securityFilterChain</span><span class="s2">(</span><span class="s1">HttpSecurity http</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">Exception </span><span class="s2">{</span>
+        <span class="s1">http</span>
+                <span class="s3">// Desabilita o CSRF para simplificar o uso com Thymeleaf (comum em testes)</span>
+                <span class="s2">.</span><span class="s1">csrf</span><span class="s2">(</span><span class="s1">AbstractHttpConfigurer::disable</span><span class="s2">)</span>
+                <span class="s2">.</span><span class="s1">authorizeHttpRequests</span><span class="s2">(</span><span class="s1">authorize -&gt; authorize</span>
+                        <span class="s3">// --- LINHA ADICIONADA PARA LIBERAR O POST DA API REST ---</span>
+                        <span class="s3">// Libera qualquer requisição POST para /api/cadastro (Postman)</span>
+                        <span class="s2">.</span><span class="s1">requestMatchers</span><span class="s2">(</span><span class="s1">HttpMethod</span><span class="s2">.</span><span class="s1">POST</span><span class="s2">, </span><span class="s4">&quot;/api/cadastro&quot;</span><span class="s2">).</span><span class="s1">permitAll</span><span class="s2">()</span>
+
+                        <span class="s3">// TORNA ESTAS URLs PÚBLICAS, SEM REQUERER AUTENTICAÇÃO (Thymeleaf)</span>
+                        <span class="s3">// ESSENCIAL: libera /confirmar-email, /login, /cadastroUsuario e assets estáticos</span>
+                        <span class="s2">.</span><span class="s1">requestMatchers</span><span class="s2">(</span><span class="s4">&quot;/login&quot;</span><span class="s2">, </span><span class="s4">&quot;/cadastroUsuario&quot;</span><span class="s2">, </span><span class="s4">&quot;/confirmar-email&quot;</span><span class="s2">, </span><span class="s4">&quot;/&quot;</span><span class="s2">, </span><span class="s4">&quot;/css/**&quot;</span><span class="s2">, </span><span class="s4">&quot;/js/**&quot;</span><span class="s2">).</span><span class="s1">permitAll</span><span class="s2">()</span>
+
+                        <span class="s3">// Qualquer outra requisição (que não seja as liberadas acima) requer autenticação</span>
+                        <span class="s2">.</span><span class="s1">anyRequest</span><span class="s2">().</span><span class="s1">authenticated</span><span class="s2">()</span>
+                <span class="s2">)</span>
+                <span class="s3">// Configura a página de login customizada</span>
+                <span class="s2">.</span><span class="s1">formLogin</span><span class="s2">(</span><span class="s1">formLogin -&gt; formLogin</span>
+                        <span class="s2">.</span><span class="s1">loginPage</span><span class="s2">(</span><span class="s4">&quot;/login&quot;</span><span class="s2">)</span>
+                        <span class="s2">.</span><span class="s1">permitAll</span><span class="s2">()</span>
+                        <span class="s2">.</span><span class="s1">defaultSuccessUrl</span><span class="s2">(</span><span class="s4">&quot;/&quot;</span><span class="s2">, </span><span class="s0">true</span><span class="s2">) </span><span class="s3">// Redireciona para o dashboard após login</span>
+                <span class="s2">)</span>
+                <span class="s3">// Configura o logout</span>
+                <span class="s2">.</span><span class="s1">logout</span><span class="s2">(</span><span class="s1">logout -&gt; logout</span>
+                        <span class="s2">.</span><span class="s1">permitAll</span><span class="s2">()</span>
+                <span class="s2">);</span>
+
+        <span class="s0">return </span><span class="s1">http</span><span class="s2">.</span><span class="s1">build</span><span class="s2">();</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
